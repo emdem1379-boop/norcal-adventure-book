@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Own Adventure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .option:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Own Adventure</h1>
+    <p id="story">You find yourself at a crossroad. Do you want to go left towards the forest or right towards the mountains?</p>
+    
+    <div class="option" onclick="choose('forest')">Go to the Forest</div>
+    <div class="option" onclick="choose('mountains')">Go to the Mountains</div>
+
+    <script>
+        function choose(direction) {
+            const story = document.getElementById('story');
+            if (direction === 'forest') {
+                story.innerHTML = 'You walk into the forest and encounter a mysterious creature. Do you want to befriend it or run away?';
+                clearOptions();
+                addOptions(['Befriend the creature', 'Run away']);
+            } else if (direction === 'mountains') {
+                story.innerHTML = 'You hike up the mountains and find a hidden cave. Do you want to enter the cave or continue hiking?';
+                clearOptions();
+                addOptions(['Enter the cave', 'Continue hiking']);
+            }
+        }
+
+        function clearOptions() {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.remove());
+        }
+
+        function addOptions(options) {
+            options.forEach(optionText => {
+                const option = document.createElement('div');
+                option.className = 'option';
+                option.innerHTML = optionText;
+                option.onclick = () => handleOption(optionText);
+                document.body.appendChild(option);
+            });
+        }
+
+        function handleOption(optionText) {
+            const story = document.getElementById('story');
+            story.innerHTML = 'You chose to: ' + optionText + '. Thanks for playing!';
+            clearOptions();
+        }
+    </script>
+</body>
+</html>
